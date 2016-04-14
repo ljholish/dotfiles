@@ -1,0 +1,139 @@
+# $Id: .muttrc,v 1.2 2002/08/31 05:30:23 ljholish Exp $
+source ~/.mutt/muttrc.local
+source ~/.mutt/mail_aliases
+
+unset ascii_chars       # Use ASCII chars for threading arrows
+set collapse_unread     # don't collapse threads with unread mails
+set mbox_type=Maildir
+set folder=~/Maildir    # where i keep my mailboxes
+set spoolfile=~/Maildir/inbox		
+set abort_unmodified=ask-yes		# auto abort replies if unchanged?
+set alias_file=~/.mutt/mail_aliases	# where I keep my aliases
+unset auto_tag			# always operate on tagged messages
+set confirmappend=no    # don't ask me if i want to append to mailboxes
+set confirmcreate		# prompt when creating new file
+set copy=yes			# always save a copy of outgoing messages
+set delete=yes			# purge deleted messages without asking
+set edit_headers		# let me edit the message header when composing
+set editor='vim "+setlocal spell spelllang=en_us"'		# editor to use when composing messages
+set fast_reply			# skip initial prompts when replying
+unset fcc_attach		# keep attachments in copies of sent messages?
+set hdr_format="%4C %Z %{%m/%d} %-15.15F (%4c) %s" # format of the index
+#set hdrs			    # include `my_hdr' lines in outgoing messages
+set help			    # show the help lines
+set include			    # always include messages when replying
+set nomark_old			# i don't care about whether a message is old
+set mail_check=10		# how often to poll for new mail
+set mbox=+inbox			# where to store read messages
+set move=yes			# don't ask about moving messages, just do it
+set pager_context=3		# lines of context to give when scrolling
+set pager_index_lines=8		# how many index lines to show in the pager
+set postponed=+postponed	# mailbox to store postponed messages in
+set print=ask-yes		# ask me if I really want to print messages
+set read_inc=25			# show progress when reading a mailbox
+set record=+outbox		# default location to save outgoing mail
+set reply_to			# always use reply-to if present
+set nosave_empty		# remove files when no messages are left
+set shell="/bin/zsh"    # program to use for shell escapes
+set signature="~/.signature"	# file which contains my signature
+set followup_to=yes		# Generate Mail-Followup-To header field
+set honor_followup_to=yes
+set sort=threads		# primary sorting method
+set sort_browser=reverse-date	# how to sort files in the dir browser
+set tilde			    # virtual lines to pad blank lines in the pager
+set tmpdir=~/tmp		# where to store temp files
+set nouse_domain		# don't qualify local addresses with $domain
+set pgp_verify_sig=no   # don't automatically verify message signatures
+set write_inc=25		# show progress while writing mailboxes
+set use_from=yes
+set envelope_from=yes
+
+# Header fields I don't normally want to see
+ignore *		# this means "ignore all lines by default"
+
+# I do want to see these fields, though!
+unignore	from: subject to cc mail-followup-to \
+		date x-mailer x-url # this shows how nicely wrap long lines
+
+# Change settings based on mailbox
+# <command> is executed when opening a mailbox matching <pattern>
+
+#folder-hook . 'set sort=date-sent'
+#folder-hook mutt 'set hdr_format="%4C %Z %02m/%02N %-20.20F (%4l) %s"'
+#folder-hook =mutt my_hdr Revolution: \#9 # real comment
+#folder-hook . 'set reply_regexp="^re:[ \t]*"'
+
+folder-hook . 'set index_format="%4C   %Z   %{%m/%d}   %-25.25F   (%4c)   %s"'
+folder-hook =outbox 'set index_format="%4C %Z %{%m/%d} %-25.25t (%4c) %s"'
+
+# Specify the order of the headers to appear when displaying a message
+unhdr_order *				# forget the previous settings
+hdr_order date from to cc subject 
+
+# Automatically use entries from ~/.mailcap to view these MIME types
+auto_view application/x-gunzip
+auto_view application/x-gzip
+auto_view text/html
+
+# Scoring
+#
+#	score <pattern> <value>
+#
+# 9999 and -9999 are special values which cause processing of hooks to stop
+# at that entry.  If you prefix the score with an equal sign (=), the score
+# is assigned to the message and processing stops.
+
+#score '~f ^me@cs\.hmc\.edu$' 1000
+#score '~t mutt | ~c mutt' =500
+#score '~f aol\.com$' -9999
+
+# Color definitions
+
+# Key bindings
+#
+#	maps:
+#		alias		alias menu
+#		attach		attachment menu
+#		browser		directory browser
+#		compose		compose menu
+#		index		message index
+#		pgp		pgp menu
+#		postpone	postponed message recall menu
+#		generic		generic keymap for all of the above
+#		editor		line editor
+#		pager		text viewer
+
+bind generic "\e<" first-entry	# emacs-like bindings for moving to top/bottom
+bind generic \e> last-entry
+bind generic { top-page
+bind generic } bottom-page
+bind generic \177 last-entry
+bind pager G bottom	# just like vi and less
+bind pager b previous-page # just like less
+
+# macro index \cb |urlview\n	# simulate the old browse-url function
+# Replace urlview above with urlscan LJH 6/16/09
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+# spamassassin classify as spam
+macro index S "|/usr/bin/spamassassin -r"
+macro pager S "|/usr/bin/spamassassin -r"
+# spamassassin classify as ham
+macro index H "|/usr/bin/sa-learn --ham  --no-sync"
+macro pager H "|/usr/bin/sa-learn --ham  --no-sync"
+
+# notmuch-mutt macros (LJH 10/23/12)
+
+macro index <F8> \
+"<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt --prompt search<enter><change-folder-readonly>~/.cache/notmuch/mutt/results<enter>" \
+"notmuch: search mail"
+
+macro index <F9> \
+"<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt thread<enter><change-folder-readonly>~/.cache/notmuch/mutt/results<enter><enter-command>set wait_key<enter>" \
+"notmuch: reconstruct thread"
+
+macro index <F6> \
+"<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt tag -inbox<enter>" \
+"notmuch: remove message from inbox"
+

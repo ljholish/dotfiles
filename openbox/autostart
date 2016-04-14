@@ -1,0 +1,7 @@
+xrdb -merge $HOME/.Xresources
+conky &
+eval $(cat ~/.fehbg)
+# xset b off
+# xmodmap /home/ljholish/.xmodmap-happyhacking
+unclutter -idle 3 &
+urxvt

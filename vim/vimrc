@@ -1,0 +1,342 @@
+" ----------------
+"  vim-plug setup
+" ----------------
+call plug#begin('~/.vim/plugged')
+
+if executable('ack')
+    Plug 'mileszs/ack.vim'
+    let g:ackprg="/usr/bin/ack-grep -H --nocolor --nogroup --column"
+endif
+
+" Markdown plugins
+Plug 'tpope/vim-markdown'
+
+" Various editing plugins
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'tpope/vim-commentary'
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+" Source Control plugins
+Plug 'tpope/vim-fugitive'
+
+" Syntax check on buffer save
+Plug 'scrooloose/syntastic'
+
+" Colorschemes
+Plug 'altercation/vim-colors-solarized'
+Plug 'endel/vim-github-colorscheme'
+
+" LESSC syntax
+Plug 'groenewege/vim-less'
+
+" JSON plugins
+Plug 'elzr/vim-json'
+
+" restructuredText in Vim
+Plug 'Rykka/riv.vim'
+let g:riv_global_leader="-"
+
+" Wiki
+Plug 'vimwiki'
+
+" CtrlP
+Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_show_hidden = 1
+
+" ----------------
+call plug#end()
+" ----------------
+
+set shm=atI                 " Disable intro screen
+set lazyredraw              " Don't redraw screen during macros
+set ttyfast                 " Improves redrawing for newer computers
+set timeoutlen=500          " Lower timeout for mappings
+set report=0                " Always report when lines are changed
+set history=50              " Only store past 50 commands
+set undolevels=150          " Only undo up to 150 times
+set titlestring=%f title    " Display filename in terminal window
+set rulerformat=%l:%c ruler " Display current column/line in bottom right
+set showcmd                 " Show incomplete command at bottom right
+set splitbelow              " Open new split windows below current
+set backspace=indent,eol,start " Allow backspacing over anything in insert mode
+set wrap linebreak          " Automatically break lines
+set pastetoggle=<f2>        " Use <f2> to paste in text from other apps
+set wildmode=full wildmenu  " Enable command-line tab completion
+set wildignore+=*.o,*.a,*.bmp,*.jpg,*.png,*.ico,*.gif "ignore binary files
+set wildignore+=*.obj,*.pyc,*.db,*.swp,*.tmp,*~
+set wildignore+=.DS_Store,.git,.hg,.svn " Hide irrelevent matches
+set completeopt=menu        " Don't show extra info on completions
+set ignorecase smartcase    " Only be case sensitive when search contains upper
+set gdefault                " Assume /g flag on :s searches
+set incsearch               " Incremental search
+set showmatch
+set relativenumber
+set hidden                  " Allow hidden buffers
+set mouse=a                 " Enable mouse support
+set enc=utf-8
+set writebackup             " backups use writebackup
+
+set viewoptions=cursor,folds,slash,unix,options
+" make vim save view (state) (folds, cursor, etc)
+au BufWinLeave *.py,*.html,*.js,*.css silent! mkview
+"make vim load view (state) (folds, cursor, etc)
+au BufWinEnter *.py,*.html,*.js,*.css silent! loadview
+
+set foldenable
+set foldmethod=indent
+set foldlevelstart=10
+set foldnestmax=10
+
+if has('gui_running')
+	set guicursor=a:blinkon0 " Disable blinking cursor
+	set guioptions=ihamR
+	set guifont=Droid\ Sans\ Mono\ 13
+	set columns=120 lines=44 " Default window size
+	set mousefocus " Set splits to automatically activate when moused over
+endif
+
+if has('statusline')
+        set laststatus=2
+
+		" Broken down into easily includeable segments
+		set statusline=%<%f\ " Filename
+		set statusline+=%w%h%m%r " Options
+        set statusline+=%{fugitive#statusline()}
+		set statusline+=\ [%{&ff}/%Y] " filetype
+		set statusline+=\ [%{getcwd()}] " current dir
+		set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
+endif
+
+" display tabs and trailing spaces
+" set list
+" set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+
+" Make the 81st char in a line stand out
+highlight ColorColumn ctermbg=red
+call matchadd('ColorColumn', '\%81v', 100)
+
+" Theme
+"color molokai
+"color kolor
+"set t_Co=256
+set background=dark
+"let g:solarized_termcolors = 256
+colorscheme solarized
+
+set hls     " Highlight search terms
+if &diff | syntax off | endif " Turn syntax highlighting off for diff
+
+" Plugin Settings
+let snips_author     = 'Larry Holish'
+
+let g:pyflakes_use_quickfix = 0
+
+" Angular data borks HTML checks
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute ", "trimming empty <", "unescaped &", "lacks \"action", "is not recognized!", "discarding unexpected"]
+
+" NERDTree
+" let g:NERDTreeMouseMode = 2
+" let g:NERDTreeWinSize = 40
+" set g:NERDTreeIgnore = ['\*.pyc$']
+" set NERDTreeShowBookmarks=1
+
+" Vimwiki
+let wiki_1 = {}
+let wiki_1.path = '~/Wiki/'
+let wiki_1.path_html = '~/public_html/wiki/'
+let wiki_1.index = 'index'
+let wiki_1.template_path = '~/Wiki/templates/'
+let wiki_1.template_default = 'default_template'
+let wiki_1.template_ext = '.html'
+let wiki_1.nested_syntaxes = {'python': 'python', 'js': 'javascript', 'php': 'php', 'bash': 'bash', 'sql': 'sql', 'plain': 'plain', 'css': 'css'}
+let g:vimwiki_list = [wiki_1]
+
+" Correct some spelling mistakes
+ia teh the
+ia htis this
+ia tihs this
+ia dispaly display
+ia funciton function
+ia funtion function
+ia fucntion function
+ia retunr return
+ia reutrn return
+ia foreahc foreach
+ia !+ !=
+ca eariler earlier
+ca !+ !=
+ca ~? ~/
+
+" Mappings
+let mapleader = ','
+
+" nnoremap <f1> :BufExplorer<cr>
+" nnoremap <leader>d :NERDTreeToggle /home/ljholish/Projects<CR>
+
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <tab> %
+vnoremap <tab> %
+
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+
+" search pattern very magic - all ASCII characters except '0'-'9', 'a'-'z',
+" 'A'-'Z' and '_' have a special meaning
+nnoremap / /\v
+vnoremap / /\v
+
+" MiniBufExplorer
+"map <leader>b :MiniBufExplorer<cr>
+"map <leader>c :CMiniBufExplorer<cr>
+"map <leader>u :UMiniBufExplorer<cr>
+"map <leader>t :TMiniBufExplorer<cr>
+
+" ^ is much more useful to me than 0
+no 0 ^
+no ^ 0
+" Scroll down faster
+no J 2<c-e>
+no K 3<c-y>
+" Swap ' and ` keys (` is much more useful)
+no ` '
+no ' `
+" Much easier to type commands this way
+" no ; :
+" Keep traditional ; functionality
+" no \ ;
+" Keep traditional , functionality
+"no _ ,
+" I always make this typo
+"no "- "_
+" Paste yanked text
+"no gp "0p
+"no gP "0P
+
+" Q: is a very annoying typo
+nn Q <Nop>
+
+" Keep traditional J functionality
+nn <c-h> J
+" Keep traditional K functionality
+nn <c-l> K
+" Make Y behave like D and C
+nn Y y$
+" Increment/decrement numbers
+nn + <c-a>
+nn - <c-x>
+" Keep traditional <c-o> functionality
+nn <leader>o <c-o>
+
+" Easier way to navigate windows
+" nm , <c-w>
+" nn ,, <c-w>p
+" nn ,W <c-w>w
+" nn ,n :vnew<cr>
+" nn ,w :w<cr>
+" nn ,x :x<cr>
+
+" Run ack in the current directory
+nmap <leader>a <Esc>:Ack!
+" Switch to current dir
+nn ,D :lcd %:p:h<cr>
+" Hide/show line numbers (useful for copying & pasting)
+nn <silent> ,# :se invnumber<cr>
+" Highlight/unhighlight lines over 80 columns
+nn ,H :cal<SID>ToggleLongLineHL()<cr>
+" List whitespace
+" nn <silent> ,<space>  :se nolist!<cr>
+nn <silent> ,R :cal<SID>RemoveWhitespace()<cr>
+" Make c-g show full path/buffer number too
+nn <c-g> 2<c-g>
+
+" Map these in visual mode, but not select
+xno j gj
+xno k gk
+
+" vm selects until the end of line (but not including the newline char)
+xno m $h
+
+" * and # search for next/previous of selected text when used in visual mode
+xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
+xno # :<c-u>cal<SID>VisualSearch()<cr>?<cr>
+
+" Open/close keyword completion menu
+" ino <expr> jx pumvisible() ? '<esc>a' : '<c-p>'
+
+" Open/close omnicompletion menu
+" ino <expr> jX pumvisible() ? '<esc>a' : '<c-x><c-o>'
+
+hi OverLength ctermbg=none cterm=none
+match OverLength /\%>80v/
+fun! s:ToggleLongLineHL()
+	if !exists('w:overLength')
+		let w:overLength = matchadd('ErrorMsg', '.\%>80v', 0)
+		echo 'Long lines highlighted'
+	else
+		cal matchdelete(w:overLength)
+		unl w:overLength
+		echo 'Long lines unhighlighted'
+	endif
+endf
+
+fun! s:VisualSearch()
+  let old = @" | norm! gvy
+  let @/ = '\V'.substitute(escape(@", '\'), '\n', '\\n', 'g')
+  let @" = old
+endf
+
+fun! s:RemoveWhitespace()
+	if &bin | return | endif
+	if search('\s\+$', 'n')
+		let line = line('.') | let col = col('.')
+		sil %s/\s\+$//ge
+		call cursor(line, col)
+		echo 'Removed trailing whitespace.'
+	else
+		echo 'No trailing whitespace found.'
+	endif
+endf
+
+fun! InitializeDirectories()
+  let separator = "."
+  let parent = $HOME
+  let prefix = '.vim'
+  let dir_list = {
+	\ 'backup': 'backupdir',
+	\ 'views': 'viewdir',
+	\ 'swap': 'directory'}
+
+	for [dirname, settingname] in items(dir_list)
+		let directory = parent . '/' . prefix . dirname . "/"
+		if exists("*mkdir")
+			if !isdirectory(directory)
+				call mkdir(directory)
+			endif
+		endif
+		if !isdirectory(directory)
+			echo "Warning: Unable to create a backup directory: " . directory
+			echo "Try: mkdir -p " . directory
+		else
+		let directory = substitute(directory, " ", "\\\\ ", "")
+		exec "set " . settingname . "=" . directory
+		endif
+	endfor
+endfunction
+
+call InitializeDirectories()
+
+" Indentation
+filetype plugin indent on
+set autoindent expandtab smarttab tabstop=4 softtabstop=4 shiftwidth=4
+
+" language-specific settings for certain filetypes/file extensions
+" wrapped in augroup so they are only applied once
+" autocmd! directive clears all the autocmd's for the current group
+augroup configgroup
+    autocmd!
+    autocmd FileType html setlocal shiftwidth=2 softtabstop=2 tabstop=2
+    autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 tabstop=2
+    autocmd FileType css setlocal shiftwidth=2 softtabstop=2 tabstop=2
+augroup END

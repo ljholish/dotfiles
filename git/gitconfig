@@ -1,0 +1,54 @@
+[user]
+	name = Larry Holish
+	email = larry@holish.net
+[color]
+	status = auto
+	diff = auto
+	branch = auto
+[color "diff"]
+    meta = yellow
+    frag = cyan
+    old = red
+    new = green
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[alias]
+    st = status -s
+    ci = commit
+    co = checkout
+    br = branch
+    diff = diff --word-diff
+    # List commits short form
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    # List commits showing changed files
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    # List oneline commits showing dates
+    lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    # History of a file with diffs
+    filelog = log -u
+    fl = log -u
+    # Show modified files in last commit
+    dl = "!git ll -1"
+    # Show a diff last commit
+    dlc = diff --cached HEAD^
+    # Search entire codebase for a string
+    grep = grep -Ii
+    # Show the last tag
+    lasttag = describe --tags --abbrev=0
+    lt = describe --tags --abbrev=0
+    # List git aliases
+    la = "!git config -l | grep alias | cut -c 7-"
+[core]
+	excludesfile = /home/ljholish/.gitignore_global
+	autocrlf = input
+	safecrlf = true
+[commit]
+	template = /home/ljholish/.git_commit_msg.txt
+[credential]
+	helper = cache --timeout=7200
