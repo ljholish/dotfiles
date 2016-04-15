@@ -11,13 +11,13 @@ Installation
 
     $ git clone git://github.com/ljholish/dotfiles.git ~/dotfiles
     $ cd ~/dotfiles
-    $ make (-n)
+    $ make
     $ # and optionally
-    $ make (-n) install-openbox
+    $ make install-openbox
 
 The default target will install the core terminal-only files and the
-install-openbox target for X and Openbox. The Makefile will overwrite so use
-the **dry run option (-n) first**.
+install-openbox target is for X and Openbox. The Makefile will clobber your
+files so use make's **dry run option (-n) first**.
 
 
 Tools
@@ -44,6 +44,11 @@ My shell of choice is Zsh. I use the [prezto configuration framework for
 Zsh](https://github.com/sorin-ionescu/prezto). My fork can be found here:
 
 [prezto](https://github.com/ljholish/prezto)
+
+TODO
+----
+
+Vim plugins. Python virtualenv.
 
 
 License
