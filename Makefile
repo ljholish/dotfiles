@@ -11,6 +11,7 @@
 	
 install : install-git \
 	install-mutt \
+	install-maildir \
 	install-mysql \
 	install-postgresql \
 	install-tmux \
@@ -43,9 +44,9 @@ install-maildir :
 		"$(HOME)"/Maildir/outbox/new \
 		"$(HOME)"/Maildir/outbox/tmp
 
-install-mutt : install-maildir
+install-mutt :
 	install -m 0755 -d -- "$(HOME)"/.mutt
-	install -pm 0644 -- mutt/muttrc "$(HOME)"/.muttrc
+	install -pm 0644 -- mutt/muttrc "$(HOME)"/.mutt/muttrc
 	install -pm 0644 -- mutt/signature "$(HOME)"/.signature
 
 install-mysql :
