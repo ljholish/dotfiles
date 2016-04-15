@@ -1,6 +1,4 @@
 # $Id: .muttrc,v 1.2 2002/08/31 05:30:23 ljholish Exp $
-source ~/.mutt/muttrc.local
-source ~/.mutt/mail_aliases
 
 unset ascii_chars       # Use ASCII chars for threading arrows
 set collapse_unread     # don't collapse threads with unread mails
@@ -8,7 +6,12 @@ set mbox_type=Maildir
 set folder=~/Maildir    # where i keep my mailboxes
 set spoolfile=~/Maildir/inbox		
 set abort_unmodified=ask-yes		# auto abort replies if unchanged?
+
 set alias_file=~/.mutt/mail_aliases	# where I keep my aliases
+set sort_alias= alias
+set reverse_alias=yes
+source $alias_file
+
 unset auto_tag			# always operate on tagged messages
 set confirmappend=no    # don't ask me if i want to append to mailboxes
 set confirmcreate		# prompt when creating new file
@@ -47,6 +50,12 @@ set pgp_verify_sig=no   # don't automatically verify message signatures
 set write_inc=25		# show progress while writing mailboxes
 set use_from=yes
 set envelope_from=yes
+
+# Personal save-hooks (must be set after $folder)
+source ~/.mutt/muttrc.local
+
+# HTML is the last option.
+alternative_order text/enriched text/plain text/html
 
 # Header fields I don't normally want to see
 ignore *		# this means "ignore all lines by default"
