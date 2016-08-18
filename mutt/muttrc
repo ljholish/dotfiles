@@ -54,9 +54,6 @@ set envelope_from=yes
 # Personal save-hooks (must be set after $folder)
 source ~/.mutt/muttrc.local
 
-# HTML is the last option.
-alternative_order text/enriched text/plain text/html
-
 # Header fields I don't normally want to see
 ignore *		# this means "ignore all lines by default"
 
