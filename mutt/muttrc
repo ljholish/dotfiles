@@ -85,6 +85,18 @@ alternative_order text/plain text/html
 unauto_view *
 auto_view text/html
 
+# Sidebar
+set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_width = 25
+# Shorten mailbox names
+set sidebar_short_path                  
+# Delete everything up to the last / character
+set sidebar_delim_chars="/"             
+set mail_check_stats
+# Use 'B' to switch the Sidebar on and off
+bind index,pager B sidebar-toggle-visible   
+
 # Scoring
 #
 #	score <pattern> <value>
