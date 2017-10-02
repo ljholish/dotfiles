@@ -4,7 +4,7 @@ unset ascii_chars       # Use ASCII chars for threading arrows
 set collapse_unread     # don't collapse threads with unread mails
 set mbox_type=Maildir
 set folder=~/Maildir    # where i keep my mailboxes
-set spoolfile=~/Maildir/inbox		
+set spoolfile=~/Maildir/INBOX
 set abort_unmodified=ask-yes		# auto abort replies if unchanged?
 
 set alias_file=~/.mutt/mail_aliases	# where I keep my aliases
@@ -27,14 +27,14 @@ set help			    # show the help lines
 set include			    # always include messages when replying
 set nomark_old			# i don't care about whether a message is old
 set mail_check=10		# how often to poll for new mail
-set mbox=+inbox			# where to store read messages
+set mbox=+INBOX			# where to store read messages
 set move=yes			# don't ask about moving messages, just do it
 set pager_context=3		# lines of context to give when scrolling
 set pager_index_lines=8		# how many index lines to show in the pager
-set postponed=+postponed	# mailbox to store postponed messages in
+set postponed=+Drafts	# mailbox to store postponed messages in
 set print=ask-yes		# ask me if I really want to print messages
 set read_inc=25			# show progress when reading a mailbox
-set record=+outbox		# default location to save outgoing mail
+set record=+Sent		# default location to save outgoing mail
 set reply_to			# always use reply-to if present
 set nosave_empty		# remove files when no messages are left
 set shell="/bin/zsh"    # program to use for shell escapes
@@ -70,11 +70,11 @@ unignore	from: subject to cc mail-followup-to \
 #folder-hook . 'set reply_regexp="^re:[ \t]*"'
 
 folder-hook . 'set index_format="%4C   %Z   %{%m/%d}   %-25.25F   (%4c)   %s"'
-folder-hook =outbox 'set index_format="%4C %Z %{%m/%d} %-25.25t (%4c) %s"'
+folder-hook =Sent 'set index_format="%4C %Z %{%m/%d} %-25.25t (%4c) %s"'
 
 # Specify the order of the headers to appear when displaying a message
 unhdr_order *				# forget the previous settings
-hdr_order date from to cc subject 
+hdr_order date from to cc subject
 
 # Automatically use entries from ~/.mailcap to view these MIME types
 auto_view application/x-gunzip
@@ -90,12 +90,12 @@ set sidebar_visible
 set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
 set sidebar_width = 25
 # Shorten mailbox names
-set sidebar_short_path                  
+set sidebar_short_path
 # Delete everything up to the last / character
-set sidebar_delim_chars="/"             
+set sidebar_delim_chars="/"
 set mail_check_stats
 # Use 'B' to switch the Sidebar on and off
-bind index,pager B sidebar-toggle-visible   
+bind index,pager B sidebar-toggle-visible
 
 # Scoring
 #
