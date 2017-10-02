@@ -132,6 +132,7 @@ bind generic } bottom-page
 bind generic \177 last-entry
 bind pager G bottom	# just like vi and less
 bind pager b previous-page # just like less
+bind pager i exit # I don't use NNTP patch
 
 # macro index \cb |urlview\n	# simulate the old browse-url function
 # Replace urlview above with urlscan LJH 6/16/09
