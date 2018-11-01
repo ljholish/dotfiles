@@ -22,10 +22,6 @@ Plug 'tpope/vim-fugitive'
 " Syntax check on buffer save
 Plug 'scrooloose/syntastic'
 
-" Colorschemes
-Plug 'altercation/vim-colors-solarized'
-Plug 'endel/vim-github-colorscheme'
-
 " LESSC syntax
 Plug 'groenewege/vim-less'
 
@@ -115,13 +111,8 @@ endif
 highlight ColorColumn ctermbg=red
 call matchadd('ColorColumn', '\%81v', 100)
 
-" Theme
-"color molokai
-"color kolor
-"set t_Co=256
-set background=dark
-"let g:solarized_termcolors = 256
-colorscheme solarized
+let base16colorspace=256 " Access colors present in 256 colorspace
+colorscheme base16-default-dark
 
 set hls     " Highlight search terms
 if &diff | syntax off | endif " Turn syntax highlighting off for diff
@@ -133,6 +124,7 @@ let g:pyflakes_use_quickfix = 0
 
 " Angular data borks HTML checks
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute ", "trimming empty <", "unescaped &", "lacks \"action", "is not recognized!", "discarding unexpected"]
+let g:syntastic_javascript_checkers = ['jshint']
 
 " NERDTree
 " let g:NERDTreeMouseMode = 2
@@ -340,3 +332,9 @@ augroup configgroup
     autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 tabstop=2
     autocmd FileType css setlocal shiftwidth=2 softtabstop=2 tabstop=2
 augroup END
+" Add format option 'w' to add trailing white space, indicating that paragraph
+" continues on next line. This is to be used with mutt's 'text_flowed' option.
+augroup mail_trailing_whitespace " {
+    autocmd!
+    autocmd FileType mail setlocal formatoptions+=aw
+augroup END " }

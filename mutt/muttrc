@@ -50,6 +50,7 @@ set pgp_verify_sig=no   # don't automatically verify message signatures
 set write_inc=25		# show progress while writing mailboxes
 set use_from=yes
 set envelope_from=yes
+set text_flowed         # format=flowed in text bodies, needs vim support
 
 # Personal save-hooks (must be set after $folder)
 source ~/.mutt/muttrc.local
