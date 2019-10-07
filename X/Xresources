@@ -1,11 +1,11 @@
+!URxvt
 URxvt*background: Black
 URxvt*foreground: White
 URxvt*colorUL: yellow
 URxvt*underlineColor: yellow
 
 URxvt.scrollTtyOutput: False
-URxvt*saveLines:	1999
-URxvt*geometry:	130x40+300+60
+URxvt*saveLines: 5000
 URxvt.scrollWithBuffer:	true
 URxvt.mouseWheelScrollPage:	true
 URxvt*scrollBar: False
@@ -15,11 +15,12 @@ URxvt.scrollTtyKeypress:	true
 URxvt*titeInhibit:	true
 
 !-- Xft settings -- !
-!Xft.dpi:        96
+Xft.dpi:        96
 Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
+Xft.autohint: false
 
 ! -- Fonts -- !
 !URxvt.font:xft:DejaVu Sans Mono:pixelsize=16
@@ -38,17 +39,6 @@ URxvt.boldFont:xft:Inconsolata:bold:pixelsize=20
 !URxvt*font:xft:DejaVu Sans Mono:pixelsize=16
 !URxvt*letterSpace: -1
 !URxvt*font: xft:Monospace:pixelsize=16
-
-xterm*cursorColor:	black
-xterm*geometry:	160x60+50+30
-xterm*titeInhibit:	True
-
-!UXTerm*Font4:	-efont-fixed-medium-r-normal-*-16-*-*-*-*-*-iso10646-1
-!UXTerm*Font3:	-efont-fixed-medium-r-normal-*-14-*-*-*-*-*-iso10646-1
-!UXTerm*Font6:	-efont-fixed-medium-r-normal-*-24-*-*-*-*-*-iso10646-1
-!UXTerm*Font2:	-efont-fixed-medium-r-normal-*-12-*-*-*-*-*-iso10646-1
-!UXTerm*Font:	-efont-fixed-medium-r-normal-*-16-*-*-*-*-*-iso10646-1
-!UXTerm*Font5:	-misc-fixed-medium-r-normal--18-*-*-*-*-*-iso10646-1
 
 xrenoise.use_xcursors:	1
 xrenoise.display:	:0
