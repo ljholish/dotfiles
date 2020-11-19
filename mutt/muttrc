@@ -70,6 +70,10 @@ unignore	from: subject to cc mail-followup-to \
 #folder-hook =mutt my_hdr Revolution: \#9 # real comment
 #folder-hook . 'set reply_regexp="^re:[ \t]*"'
 
+# Delete via trash
+folder-hook .      set trash="=Trash"
+folder-hook Trash$ unset trash
+
 folder-hook . 'set index_format="%4C   %Z   %{%m/%d}   %-25.25F   (%4c)   %s"'
 folder-hook =Sent 'set index_format="%4C %Z %{%m/%d} %-25.25t (%4c) %s"'
 
