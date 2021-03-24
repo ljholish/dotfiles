@@ -33,7 +33,7 @@ Plug 'Rykka/riv.vim'
 let g:riv_global_leader="-"
 
 " Wiki
-Plug 'vimwiki'
+Plug 'vimwiki/vimwiki'
 
 " CtrlP
 Plug 'ctrlpvim/ctrlp.vim'
