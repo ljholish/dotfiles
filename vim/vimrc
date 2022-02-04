@@ -15,6 +15,7 @@ Plug 'tpope/vim-markdown'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-commentary'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plug 'psf/black', { 'branch': 'stable' }
 
 " Source Control plugins
 Plug 'tpope/vim-fugitive'
