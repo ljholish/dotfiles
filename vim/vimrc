@@ -5,33 +5,21 @@ call plug#begin('~/.vim/plugged')
 
 if executable('ack')
     Plug 'mileszs/ack.vim'
-    let g:ackprg="/usr/bin/ack-grep -H --nocolor --nogroup --column"
+    " let g:ackprg="/usr/bin/ack-grep -H --nocolor --nogroup --column"
 endif
-
-" Markdown plugins
-Plug 'tpope/vim-markdown'
 
 " Various editing plugins
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-commentary'
-Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'psf/black', { 'branch': 'stable' }
+" Plug 'tpope/vim-markdown'
+" Plug 'elzr/vim-json'
 
 " Source Control plugins
 Plug 'tpope/vim-fugitive'
 
-" Syntax check on buffer save
-Plug 'scrooloose/syntastic'
-
-" LESSC syntax
-Plug 'groenewege/vim-less'
-
-" JSON plugins
-Plug 'elzr/vim-json'
-
-" restructuredText in Vim
-Plug 'Rykka/riv.vim'
-let g:riv_global_leader="-"
+" Syntax check / linting
+" Plug 'dense-analysis/ale'
 
 " Wiki
 Plug 'vimwiki/vimwiki'
@@ -163,9 +151,6 @@ ca ~? ~/
 " Mappings
 let mapleader = ','
 
-" nnoremap <f1> :BufExplorer<cr>
-" nnoremap <leader>d :NERDTreeToggle /home/ljholish/Projects<CR>
-
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 nnoremap <tab> %
@@ -180,12 +165,6 @@ nnoremap k gk
 nnoremap / /\v
 vnoremap / /\v
 
-" MiniBufExplorer
-"map <leader>b :MiniBufExplorer<cr>
-"map <leader>c :CMiniBufExplorer<cr>
-"map <leader>u :UMiniBufExplorer<cr>
-"map <leader>t :TMiniBufExplorer<cr>
-
 " ^ is much more useful to me than 0
 no 0 ^
 no ^ 0
@@ -195,14 +174,6 @@ no K 3<c-y>
 " Swap ' and ` keys (` is much more useful)
 no ` '
 no ' `
-" Much easier to type commands this way
-" no ; :
-" Keep traditional ; functionality
-" no \ ;
-" Keep traditional , functionality
-"no _ ,
-" I always make this typo
-"no "- "_
 " Paste yanked text
 "no gp "0p
 "no gP "0P
@@ -222,16 +193,6 @@ nn - <c-x>
 " Keep traditional <c-o> functionality
 nn <leader>o <c-o>
 
-" Easier way to navigate windows
-" nm , <c-w>
-" nn ,, <c-w>p
-" nn ,W <c-w>w
-" nn ,n :vnew<cr>
-" nn ,w :w<cr>
-" nn ,x :x<cr>
-
-" Run ack in the current directory
-nmap <leader>a <Esc>:Ack!
 " Switch to current dir
 nn ,D :lcd %:p:h<cr>
 " Hide/show line numbers (useful for copying & pasting)
@@ -254,12 +215,6 @@ xno m $h
 " * and # search for next/previous of selected text when used in visual mode
 xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
 xno # :<c-u>cal<SID>VisualSearch()<cr>?<cr>
-
-" Open/close keyword completion menu
-" ino <expr> jx pumvisible() ? '<esc>a' : '<c-p>'
-
-" Open/close omnicompletion menu
-" ino <expr> jX pumvisible() ? '<esc>a' : '<c-x><c-o>'
 
 hi OverLength ctermbg=none cterm=none
 match OverLength /\%>80v/
