@@ -19,7 +19,7 @@ Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tpope/vim-fugitive'
 
 " Syntax check / linting
-" Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 
 " Wiki
 Plug 'vimwiki/vimwiki'
