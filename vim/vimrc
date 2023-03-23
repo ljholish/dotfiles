@@ -72,14 +72,6 @@ set foldmethod=indent
 set foldlevelstart=10
 set foldnestmax=10
 
-if has('gui_running')
-	set guicursor=a:blinkon0 " Disable blinking cursor
-	set guioptions=ihamR
-	set guifont=Droid\ Sans\ Mono\ 13
-	set columns=120 lines=44 " Default window size
-	set mousefocus " Set splits to automatically activate when moused over
-endif
-
 if has('statusline')
         set laststatus=2
 
@@ -92,16 +84,7 @@ if has('statusline')
 		set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
 endif
 
-" display tabs and trailing spaces
-" set list
-" set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
-
-" Make the 81st char in a line stand out
-highlight ColorColumn ctermbg=red
-call matchadd('ColorColumn', '\%81v', 100)
-
-let base16colorspace=256 " Access colors present in 256 colorspace
-colorscheme base16-default-dark
+colorscheme ir_black
 
 set hls     " Highlight search terms
 if &diff | syntax off | endif " Turn syntax highlighting off for diff
@@ -215,19 +198,6 @@ xno m $h
 " * and # search for next/previous of selected text when used in visual mode
 xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
 xno # :<c-u>cal<SID>VisualSearch()<cr>?<cr>
-
-hi OverLength ctermbg=none cterm=none
-match OverLength /\%>80v/
-fun! s:ToggleLongLineHL()
-	if !exists('w:overLength')
-		let w:overLength = matchadd('ErrorMsg', '.\%>80v', 0)
-		echo 'Long lines highlighted'
-	else
-		cal matchdelete(w:overLength)
-		unl w:overLength
-		echo 'Long lines unhighlighted'
-	endif
-endf
 
 fun! s:VisualSearch()
   let old = @" | norm! gvy
