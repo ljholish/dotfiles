@@ -1,6 +1,12 @@
 " ----------------
-"  vim-plug setup
+"  vim-plug auto-install & setup
 " ----------------
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 
 if executable('ack')
@@ -93,16 +99,6 @@ if &diff | syntax off | endif " Turn syntax highlighting off for diff
 let snips_author     = 'Larry Holish'
 
 let g:pyflakes_use_quickfix = 0
-
-" Angular data borks HTML checks
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute ", "trimming empty <", "unescaped &", "lacks \"action", "is not recognized!", "discarding unexpected"]
-let g:syntastic_javascript_checkers = ['jshint']
-
-" NERDTree
-" let g:NERDTreeMouseMode = 2
-" let g:NERDTreeWinSize = 40
-" set g:NERDTreeIgnore = ['\*.pyc$']
-" set NERDTreeShowBookmarks=1
 
 " Vimwiki
 let wiki_1 = {}
