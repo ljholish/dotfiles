@@ -7,10 +7,14 @@ set folder=~/Maildir    # where i keep my mailboxes
 set spoolfile=~/Maildir/INBOX
 set abort_unmodified=ask-yes		# auto abort replies if unchanged?
 
-set alias_file=~/.mutt/mail_aliases	# where I keep my aliases
-set sort_alias= alias
-set reverse_alias=yes
-source $alias_file
+# Switched to abook 2021-01-25
+#set alias_file=~/.mutt/mail_aliases	# where I keep my aliases
+#set sort_alias= alias
+#set reverse_alias=yes
+#source $alias_file
+set query_command="abook --mutt-query '%s'"
+macro index,pager a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
+bind editor <Tab> complete-query
 
 unset auto_tag			# always operate on tagged messages
 set confirmappend=no    # don't ask me if i want to append to mailboxes
@@ -20,6 +24,7 @@ set delete=yes			# purge deleted messages without asking
 set edit_headers		# let me edit the message header when composing
 set editor='vim "+setlocal spell spelllang=en_us"'		# editor to use when composing messages
 set fast_reply			# skip initial prompts when replying
+set sleep_time=0
 unset fcc_attach		# keep attachments in copies of sent messages?
 set hdr_format="%4C %Z %{%m/%d} %-15.15F (%4c) %s" # format of the index
 #set hdrs			    # include `my_hdr' lines in outgoing messages
@@ -30,7 +35,7 @@ set mail_check=10		# how often to poll for new mail
 set mbox=+INBOX			# where to store read messages
 set move=yes			# don't ask about moving messages, just do it
 set pager_context=3		# lines of context to give when scrolling
-set pager_index_lines=8		# how many index lines to show in the pager
+set pager_index_lines=8	# how many index lines to show in the pager
 set postponed=+Drafts	# mailbox to store postponed messages in
 set print=ask-yes		# ask me if I really want to print messages
 set read_inc=25			# show progress when reading a mailbox
@@ -144,15 +149,7 @@ bind pager i exit # I don't use NNTP patch
 macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 
-# spamassassin classify as spam
-macro index S "|/usr/bin/spamassassin -r"
-macro pager S "|/usr/bin/spamassassin -r"
-# spamassassin classify as ham
-macro index H "|/usr/bin/sa-learn --ham  --no-sync"
-macro pager H "|/usr/bin/sa-learn --ham  --no-sync"
-
 # notmuch-mutt macros (LJH 10/23/12)
-
 macro index <F8> \
 "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt --prompt search<enter><change-folder-readonly>~/.cache/notmuch/mutt/results<enter>" \
 "notmuch: search mail"
