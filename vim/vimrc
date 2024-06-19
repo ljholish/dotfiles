@@ -18,8 +18,8 @@ endif
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-commentary'
 Plug 'psf/black', { 'branch': 'stable' }
+Plug 'stephpy/vim-yaml'
 " Plug 'tpope/vim-markdown'
-" Plug 'elzr/vim-json'
 
 " Source Control plugins
 Plug 'tpope/vim-fugitive'
@@ -90,7 +90,7 @@ if has('statusline')
 		set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
 endif
 
-colorscheme xoria256
+colorscheme slate
 
 set hls     " Highlight search terms
 if &diff | syntax off | endif " Turn syntax highlighting off for diff
