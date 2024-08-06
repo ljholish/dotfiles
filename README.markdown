@@ -9,7 +9,7 @@ town.
 Installation
 ------------
 
-    $ git clone https://github.com/ljholish/dotfiles.git ~/dotfiles
+    $ git clone https://github.com/ljholish/dotfiles.git
     $ cd ~/dotfiles
     $ make
     $ # and optionally
@@ -26,11 +26,9 @@ Tools
 Configuration is included for:
 
 *   [Git](http://git-scm.com/) - Distributed version control system
-*   [openbox](http://openbox.org/) -  X window manager
+*   [i3](https://i3wm.org/) -  i3 tiling window manager
 *   [Mutt](http://www.mutt.org/) - MUA
-*   [`mysql(1)`](http://linux.die.net/man/1/mysql) - Command-line MySQL client
 *   [tmux](https://tmux.github.io/) - Terminal multiplexer
-*   [`mysql(1)`](http://linux.die.net/man/1/mysql) - Command-line MySQL client
 *   [`psql(1)`](http://linux.die.net/man/1/psql) - Command-line PostgreSQL client
 *   [Vim](http://www.vim.org/) - Vi IMproved, a text editor
 *   [X11](http://www.x.org/wiki/) - Windowing system with network transparency

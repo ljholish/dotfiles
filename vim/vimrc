@@ -26,6 +26,8 @@ Plug 'tpope/vim-fugitive'
 
 " Syntax check / linting
 Plug 'dense-analysis/ale'
+let g:ale_linters = { 'python': ['ruff', ], }
+let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['ruff', 'black'], }
 
 " Wiki
 Plug 'vimwiki/vimwiki'
